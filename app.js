@@ -1,51 +1,106 @@
-var express     = require("express"),
-     app        = express(),
-    bodyParser  = require("body-parser"),
-     mongoose   = require("mongoose")
+var express = require("express"),
+    app = express(),
+    bodyParser = require("body-parser"),
+    mongoose = require("mongoose")
 
-     mongoose.connect("mongodb://localhost/my_database");
 
-app.use(bodyParser.urlencoded({extended:true}));
+
+mongoose.connect("mongodb://localhost/stud_db");
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.set("view engine", "ejs");
 
 
 // SCHEMA SETUP
+var studentSchema = new mongoose.Schema({
+        name:String,
+        batch:String,
+        group:String
+})
+var student = mongoose.model("student",studentSchema);
+
+student.create(
+    {
+        name: "piyu sharma",
+        batch: "12",
+        group: "commerce"
+    }, function(err , student){
+        if(err){
+            console.log(err);
+        }else{
+            console.log("Newly Added Student Detail");
+            console.log(student);
+        }
+    });
 
 
-var students = [
-    {name: "riya sharma",batch: "12", group: "science"},
-    {name: "siya sharma",batch: "12", group: "commerce"},
-    {name: "priya sharma",batch: "12", group: "science"}
+
+
+
+
+
+
+
+
+
+var students = [{
+        name: "riya sharma",
+        batch: "12",
+        group: "science"
+    },
+    {
+        name: "siya sharma",
+        batch: "12",
+        group: "commerce"
+    },
+    {
+        name: "priya sharma",
+        batch: "12",
+        group: "science"
+    }
 
 ];
-app.get("/", function(req , res){
-        res.render("home");
-}); 
+app.get("/", function (req, res) {
+    res.render("home");
+});
 
-app.get("/students", function(req,res){
+app.get("/students", function (req, res) {
+    // get all campgrounds from db
+    student.find({}, function(err,students){
+        if(err){
+            console.log(err);
+        }else
+    })
 
-        res.render("students",{students:students});
+    // res.render("students", {
+    //     students: students
+    // });
 });
 
 
-app.post("/students",function(req, res){
-       
+app.post("/students", function (req, res) {
+
     // get data from form and add to students array
 
-   var name = req.body.name;
+    var name = req.body.name;
     var batch = req.body.batch;
- var group =  req.body.group;
- var newStudent = {name:name, batch:batch, group:group}
- students.push(newStudent);
+    var group = req.body.group;
+    var newStudent = {
+        name: name,
+        batch: batch,
+        group: group
+    }
+    students.push(newStudent);
 
     // redirect back to students
     res.redirect("/students");
 
 });
 
-app.get("/students/new", function(req,res){
+app.get("/students/new", function (req, res) {
     res.render("new.ejs");
 })
-app.listen(3000, function(){
+app.listen(3000, function () {
     console.log("server started")
 })
