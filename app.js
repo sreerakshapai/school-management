@@ -1,11 +1,17 @@
-var express =require("express");
-var app = express();
-var bodyParser = require("body-parser");
- 
+var express     = require("express"),
+     app        = express(),
+    bodyParser  = require("body-parser"),
+     mongoose   = require("mongoose")
 
+     mongoose.connect("mongodb://localhost/my_database");
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
+
+
+// SCHEMA SETUP
+
+
 var students = [
     {name: "riya sharma",batch: "12", group: "science"},
     {name: "siya sharma",batch: "12", group: "commerce"},
