@@ -70,7 +70,9 @@ app.get("/students", function (req, res) {
     student.find({}, function(err,students){
         if(err){
             console.log(err);
-        }else
+        }else{
+
+        }
     })
 
     // res.render("students", {
