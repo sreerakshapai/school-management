@@ -18,30 +18,21 @@ var studentSchema = new mongoose.Schema({
         batch:String,
         group:String
 })
-var student = mongoose.model("student",studentSchema);
+var student = mongoose.model("student",studentSchema);` `
 
-student.create(
-    {
-        name: "piyu sharma",
-        batch: "12",
-        group: "commerce"
-    }, function(err , student){
-        if(err){
-            console.log(err);
-        }else{
-            console.log("Newly Added Student Detail");
-            console.log(student);
-        }
-    });
-
-
-
-
-
-
-
-
-
+// student.create(
+//     {
+//         name: "Ria sharma",
+//         batch: "12",
+//         group: "commerce"
+//     }, function(err , student){
+//         if(err){
+//             console.log(err);
+//         }else{
+//             console.log("Newly Added Student Detail");
+//             console.log(student);
+//         }
+//     });
 
 
 var students = [{
@@ -67,17 +58,17 @@ app.get("/", function (req, res) {
 
 app.get("/students", function (req, res) {
     // get all campgrounds from db
-    student.find({}, function(err,students){
+    student.find({}, function(err,allStudents){
         if(err){
             console.log(err);
         }else{
-
+            res.render("students", {
+                students: allStudents
+            });
         }
     })
 
-    // res.render("students", {
-    //     students: students
-    // });
+  
 });
 
 
@@ -93,8 +84,7 @@ app.post("/students", function (req, res) {
         batch: batch,
         group: group
     }
-    students.push(newStudent);
-
+    // Create a new student detail and save to database
     // redirect back to students
     res.redirect("/students");
 
