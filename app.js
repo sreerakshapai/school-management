@@ -2,11 +2,12 @@ var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose")
+    mongoose.Promise = global.Promise;
 
+     var mongodb = 'mongodb:rakshavibs:vibs2018@ds141870.mlab.com:41870/schoolapp'
+     mongoose.Promise = global.Promise;
 
-
-mongoose.connect("mongodb://localhost/stud_db");
-app.use(bodyParser.urlencoded({
+    app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.set("view engine", "ejs");
