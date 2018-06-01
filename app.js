@@ -1,6 +1,9 @@
 var express = require("express"),
     app = express(),
-    bodyParser = require("body-parser");
+
+    bodyParser = require("body-parser"),
+    student = require("./models/campground"),   
+    user = require("./models/user")
 
 
 
@@ -20,16 +23,7 @@ app.use(express.static('public'))
 
 
 // SCHEMA SETUP 
-var studentSchema = new mongoose.Schema({
-    name: String,
-    batch: String,
-    group: String,
-    m1:Number,
-    m2:Number,
-    m3:Number,
-    m4:Number
-})
-var student = mongoose.model("student", studentSchema);
+
 
 app.get("/", function (req, res) {
     res.render("home");
