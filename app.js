@@ -85,6 +85,12 @@ app.post("/students", function (req, res) {
         group: group
     }
     // Create a new student detail and save to database
+    student.create(newStudent, function(err, Newlycreated){
+            if(err){
+                    
+            }
+            
+    })
     // redirect back to students
     res.redirect("/students");
 
