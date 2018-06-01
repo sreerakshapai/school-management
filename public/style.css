@@ -3,4 +3,7 @@
     border: 5px double black;
     margin: 2.5% auto;
     background-color: navajowhite;
+    padding: 20px 20px;
+     text-align: center;  
+     width: 40%; 
 }
