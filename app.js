@@ -4,106 +4,103 @@ var express = require("express"),
 
 
 
- var  mongoose = require("mongoose");
+var mongoose = require("mongoose");
+var mongoDB = 'mongodb://rakshavibs:vibs2018@ds141870.mlab.com:41870/schoolapp';
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-     var MongoDB = 'mongodb:rakshavibs:vibs2018@ds141870.mlab.com:41870/schoolapp';
-     mongoose.connect(MongoDB);
-     mongoose.Promise = global.Promise;
-     var db = mongoose.connection;
-     db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-    app.use(bodyParser.urlencoded({
+app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.set("view engine", "ejs");
 
+app.use(express.static('public'))
+
 
 // SCHEMA SETUP 
 var studentSchema = new mongoose.Schema({
-        name:String,
-        batch:String,
-        group:String
+    name: String,
+    batch: String,
+    group: String,
+    m1:Number,
+    m2:Number,
+    m3:Number,
+    m4:Number
 })
-var student = mongoose.model("student",studentSchema);` `
+var student = mongoose.model("student", studentSchema);
 
-// student.create(
-//     {
-//         name: "Ria sharma",
-//         batch: "12",
-//         group: "commerce"
-//     }, function(err , student){
-//         if(err){
-//             console.log(err);
-//         }else{
-//             console.log("Newly Added Student Detail");
-//             console.log(student);
-//         }
-//     });
-
-
-var students = [{
-        name: "riya sharma",
-        batch: "12",
-        group: "science"
-    },
-    {
-        name: "siya sharma",
-        batch: "12",
-        group: "commerce"
-    },
-    {
-        name: "priya sharma",
-        batch: "12",
-        group: "science"
-    }
-
-];
 app.get("/", function (req, res) {
     res.render("home");
 });
-
+// INDEX -show all student details
 app.get("/students", function (req, res) {
     // get all campgrounds from db
-    student.find({}, function(err,allStudents){
-        if(err){
+    student.find({}, function (err, allStudents) {
+        if (err) {
             console.log(err);
-        }else{
+        } else {
             res.render("students", {
                 students: allStudents
             });
         }
     })
 
-  
+
 });
 
-
-app.post("/students", function (req, res) {
+// CREATE -add new student info
+app.post("/students", function (    
+    req, res) {
 
     // get data from form and add to students array
-
     var name = req.body.name;
-    var batch = req.body.batch;
+    var batch= req.body.batch;
     var group = req.body.group;
-    var newStudent = {
-        name: name,
-        batch: batch,
-        group: group
-    }
-    // Create a new student detail and save to database
-    student.create(newStudent, function(err, Newlycreated){
-            if(err){
-                    
-            }
-            
-    })
-    // redirect back to students
-    res.redirect("/students");
+    var m1 = req.body.m1;
+    var m2 = req.body.m2;
+    var m3 = req.body.m3;
+    var m4 = req.body.m4;
+    var newStudent ={name: name, batch: batch, group: group, m1: m1, m2: m2, m3: m3 ,m4: m4}
+     // Create a new student detail and save to database
+
+    student.create(newStudent, function (err, Newlycreated) {
+        if (err) {
+            console.log(err);
+        } else {
+            // redirect back to students
+            res.redirect("/students");
+        }
+
+    });
+
 
 });
-
+// new
 app.get("/students/new", function (req, res) {
     res.render("new.ejs");
 })
-app.listen(3000, function () {
-    console.log("server started")
+
+
+// show
+app.get("/students/:id", function(req, res){
+    //find the student with provided ID
+    student.findById(req.params.id, function(err, allStudents){
+        if(err){
+            console.log(err);
+        } else {
+            //render show template with that campground
+            res.render("show", {student: allStudents});
+        }
+    });
+}); 
+
+
+app.listen(3000, function (err) {
+    if (err) {
+        console.log("Server in Use")
+    }
+    console.log("Server started")
 })
+
