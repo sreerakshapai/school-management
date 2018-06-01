@@ -1,19 +1,23 @@
 var express = require("express"),
     app = express(),
-    bodyParser = require("body-parser"),
-    mongoose = require("mongoose")
-    mongoose.Promise = global.Promise;
+    bodyParser = require("body-parser");
 
-     var mongodb = 'mongodb:rakshavibs:vibs2018@ds141870.mlab.com:41870/schoolapp'
+
+
+ var  mongoose = require("mongoose");
+
+     var MongoDB = 'mongodb:rakshavibs:vibs2018@ds141870.mlab.com:41870/schoolapp';
+     mongoose.connect(MongoDB);
      mongoose.Promise = global.Promise;
-
+     var db = mongoose.connection;
+     db.on('error', console.error.bind(console, 'MongoDB connection error:'));
     app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.set("view engine", "ejs");
 
 
-// SCHEMA SETUP
+// SCHEMA SETUP 
 var studentSchema = new mongoose.Schema({
         name:String,
         batch:String,
