@@ -2,7 +2,7 @@ var express = require("express"),
     app = express(),
 
     bodyParser = require("body-parser"),
-    student = require("./models/campground"),   
+    student = require("./models/stud"),   
     user = require("./models/user")
 
 
