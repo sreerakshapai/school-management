@@ -46,13 +46,14 @@ app.get("/", function (req, res) {
 });
 // INDEX -show all student details
 app.get("/students", function (req, res) {
+
     // get all campgrounds from db
     student.find({}, function (err, allStudents) {
         if (err) {
             console.log(err);
         } else {
             res.render("students", {
-                students: allStudents
+                students: allStudents, currentUser: req.user
             });
         }
     })
