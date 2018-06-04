@@ -1,12 +1,16 @@
 var express = require("express"),
     app = express(),
-
     bodyParser = require("body-parser"),
     student = require("./models/stud"),   
-    user = require("./models/user")
+    user = require("./models/user"),
+    seedDB = require("./seeds"),
+    passport = require("passport"),
+    localStrategy = require("passport-local")
 
 
 
+
+seedDB();
 var mongoose = require("mongoose");
 var mongoDB = 'mongodb://rakshavibs:vibs2018@ds141870.mlab.com:41870/schoolapp';
 mongoose.connect(mongoDB);
