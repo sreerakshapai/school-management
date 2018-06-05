@@ -7,3 +7,25 @@
      text-align: center;  
      width: 40%; 
 }
+
+ #form1{
+    width:100%;
+}
+.form-group {
+    flex: 1;
+    display: flex;
+    margin: 0;
+    padding: 2%;
+}
+
+.form-group > * {
+    margin: 0;
+}
+
+
+input {
+    flex: 5;
+    border: 2px solid #999;
+    padding: 1%;
+    border-radius: 1%;
+}

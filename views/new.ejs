@@ -2,50 +2,102 @@
     <div class="container">
         <h1 style="text-align: center;">Add a new student Info</h1>
         <div style="width: 30%; margin: 25px auto">
-            <form action="/students" method="POST">
+
+
+            <form id="form1" action="/students" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="name" placeholder="Name">
+                   Enter the Name :
+                    <input class="form-control" type="text" size="20" name="name">
+                </div>
+
+                <div class="form-group">
+                 Marks in m1 :
+                    <input class="form-control" type="text" size="20" name="m1">
+
 
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="batch" placeholder="Batch">
+                     Marks in m2 :
+                    <input class="form-control" type="text" size="20" name="m2">
+                </div>
 
-                </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="group" placeholder="Group">
+                 Marks in m3 :
+                 
+                    <input class="form-control" type="text" size="20" name="m3" />
+                </div>
 
-                </div>
-                <h2>Marks -subjectwise</h2>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="m1" placeholder="m1-phy">
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="m2" placeholder="m2-chem">
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="m3" placeholder="m3-bio">
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="m4" placeholder="m4-maths">
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-lg btn-primary btn-block">submit</button>
+                 Marks in m4 :
+                   
+                    <input class="form-control" type="text" size="20" name="m4" />
 
                 </div>
 
-               
+                <div class="form-group">
+                  
+                    <input class=" btn btn-lg btn-primary btn-block" type="button" name="btn" value="Calculate" onclick="calc()" />
+
+                </div>
+                <div class="form-group">
+
+                    Total :
+                    <input class="form-control" type="text" size="20" name="total" />
+                </div>
+
+                <div class="form-group">
+                    Average :
+                    <input class="form-control" type="text" size="20" name="avg" />
+                </div>
+
+                <div class="form-group">
+                    Result :
+                    <input class="form-control" type="text" size="20" name="result" />
+                </div>
+                <div class="form-group">
+                    <br /> Grade :
+                    <input class="form-control" type="text" size="20" name="grade" />
+                </div>
+                <div class="form-group">
+                    <br />
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" name="Btn2" value="Submit" />
+                </div>
+                <div class="form-group">
+                    <br />
+                    <input class="btn btn-lg btn-primary btn-block" type="reset" name="Btn2" value="Reset" />
+                </div>
+
             </form>
-
             <a href="/students">Go Back</a>
-            
+            <script type="text/javascript">
+                function calc() {
+                    form = document.getElementById("form1");
+                    m1 = form.m1.value;
+                    m2 = form.m2.value;
+                    m3 = form.m3.value;
+                    m4 = form.m4.value;
+                    // Find the total -- TypeCast the values of the textboxes to integer.
+                    total = parseInt(m1) + parseInt(m2) + parseInt(m3) + parseInt(m4);
+                    form.total.value = total; // display the total into textbox.
+                    form.avg.value = parseInt(total) / 4; // typecast.
+                    // if any one sub is <35 then result is "Fail".
+                    if (m1 < 35 || m2 < 35 || m3 < 35 || m4 < 35) {
+                        form.result.value = "Fail";
+                    } else {
+                        form.result.value = "Pass";
+                    }
+                    // Grading system.
+                    if (form.avg.value > 90) {
+                        form.grade.value = "A";
+                    } else if (form.avg.value > 80 && form.avg.value < 90) {
+                        form.grade.value = "B";
+                    } else if (form.avg.value > 70 && form.avg.value < 80) {
+                        form.grade.value = "C";
+                    } else if (form.avg.value > 60 && form.avg.value < 70) {
+                        form.grade.value = "D";
+                    } else if (form.avg.value >= 35 && form.avg.value < 60) {
+                        form.grade.value = "E";
+                    }
+                }
+            </script>
         </div>
-        <h2>Report Card</h2>
-        <form action="/result" method="POST">
-    <table border="1">
-        <tr><td>Name</td><td><input type="text" id="txtStudentName" readonly></td></tr>
-        <tr><td>Class</td><td><input type="text" id="txtStudentClass" readonly></td></tr>
-        <tr><td>Total Marks</td><td><input type="text" id="txtTotalMarks" readonly></td></tr>
-        <tr><td>Average Marks</td><td><input type="text" id="txtAvgMarks" readonly></td></tr>
-        <tr><td>Grade</td><td><input type="text" id="txtGrade" readonly></td></tr>
-        <tr><td>Remarks</td><td><input type="text" id="txtResult" readonly></td></tr>
-    </table></form>
