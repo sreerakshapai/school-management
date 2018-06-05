@@ -7,7 +7,7 @@ function seedDB(){
         if(err){
             console.log(err);
         }
-        console.log("removed student info");
+        // console.log("removed student info");
     });
     
 

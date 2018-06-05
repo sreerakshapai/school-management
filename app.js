@@ -40,6 +40,10 @@ app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+app.use(function(req,res,next){
+    res.locals.currentUser = req.user;
+    next();
+});
 
 
 app.get("/", function (req, res) {
@@ -54,10 +58,9 @@ student.find({}, function (err, allStudents) {
         console.log(err);
     } else {
         res.render("students", {
-            students: allStudents, currentUser: req.user
-        });
+            students: allStudents, currentUser: req.user });
     }
-})
+});
 
 
 });
@@ -154,7 +157,7 @@ app.post("/login", passport.authenticate("local",
  }), function(req, res){
 });
 
-// logic route
+// logout route
 app.get("/logout", function(req, res){
 req.logout();
 res.redirect("/students");
