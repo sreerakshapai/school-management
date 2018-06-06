@@ -5,11 +5,13 @@ var express = require("express"),
     User = require("./models/user"),
     seedDB = require("./seeds"),
     passport = require("passport"),
+    methodOverride = require("method-override"),
     localStrategy = require("passport-local")
 
 
+
 //requring routes
-  var  studRoutes = require("./routes/candidate"),
+  var  studRoutes = require("./routes/students"),
     indexRoutes      = require("./routes/index")
 
 var mongoose = require("mongoose");
@@ -23,7 +25,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.set("view engine", "ejs");
 
-app.use(express.static('public'))
+app.use(express.static('public'));
+
+app.use(methodOverride("_method"));
 
 
 
@@ -50,7 +54,7 @@ app.use(function (req, res, next) {
 });
 
 app.use("/", indexRoutes);
-app.use("/campgrounds", studRoutes);
+app.use("/students", studRoutes);
 
 
 app.listen(3000, function (err) {

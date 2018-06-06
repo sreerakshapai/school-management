@@ -1,0 +1,103 @@
+<h1>edit form</h1><% include partials/header %>
+<div class="container">
+    <h1 style="text-align: center;">Add a new student Info</h1>
+    <div style="width: 30%; margin: 25px auto">
+
+
+        <form id="form1" action="/students" method="POST">
+            <div class="form-group">
+               Enter the Name :
+                <input class="form-control" type="text" size="20" name="name">
+            </div>
+
+            <div class="form-group">
+             Marks in m1 :
+                <input class="form-control" type="text" size="20" name="m1">
+
+
+            </div>
+            <div class="form-group">
+                 Marks in m2 :
+                <input class="form-control" type="text" size="20" name="m2">
+            </div>
+
+            <div class="form-group">
+             Marks in m3 :
+             
+                <input class="form-control" type="text" size="20" name="m3" />
+            </div>
+
+            <div class="form-group">
+             Marks in m4 :
+               
+                <input class="form-control" type="text" size="20" name="m4" />
+
+            </div>
+
+            <div class="form-group">
+              
+                <input class=" btn btn-lg btn-primary btn-block" type="button" name="btn" value="Calculate" onclick="calc()" />
+
+            </div>
+            <div class="form-group">
+
+                Total :
+                <input class="form-control" type="text" size="20" name="total" />
+            </div>
+
+            <div class="form-group">
+                Average :
+                <input class="form-control" type="text" size="20" name="avg" />
+            </div>
+
+            <div class="form-group">
+                Result :
+                <input class="form-control" type="text" size="20" name="result" />
+            </div>
+            <div class="form-group">
+                <br /> Grade :
+                <input class="form-control" type="text" size="20" name="grade" />
+            </div>
+            <div class="form-group">
+                <br />
+                <input class="btn btn-lg btn-primary btn-block" type="submit" name="Btn2" value="Submit" />
+            </div>
+            <div class="form-group">
+                <br />
+                <input class="btn btn-lg btn-primary btn-block" type="reset" name="Btn2" value="Reset" />
+            </div>
+
+        </form>
+        <a href="/students">Go Back</a>
+        <script type="text/javascript">
+            function calc() {
+                form = document.getElementById("form1");
+                m1 = form.m1.value;
+                m2 = form.m2.value;
+                m3 = form.m3.value;
+                m4 = form.m4.value;
+                // Find the total -- TypeCast the values of the textboxes to integer.
+                total = parseInt(m1) + parseInt(m2) + parseInt(m3) + parseInt(m4);
+                form.total.value = total; // display the total into textbox.
+                form.avg.value = parseInt(total) / 4; // typecast.
+                // if any one sub is <35 then result is "Fail".
+                if (m1 < 35 || m2 < 35 || m3 < 35 || m4 < 35) {
+                    form.result.value = "Fail";
+                } else {
+                    form.result.value = "Pass";
+                }
+                // Grading system.
+                if (form.avg.value > 90) {
+                    form.grade.value = "A";
+                } else if (form.avg.value > 80 && form.avg.value < 90) {
+                    form.grade.value = "B";
+                } else if (form.avg.value > 70 && form.avg.value < 80) {
+                    form.grade.value = "C";
+                } else if (form.avg.value > 60 && form.avg.value < 70) {
+                    form.grade.value = "D";
+                } else if (form.avg.value >= 35 && form.avg.value < 60) {
+                    form.grade.value = "E";
+                }
+            }
+        </script>
+    </div>
