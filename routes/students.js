@@ -30,7 +30,7 @@ router.post("/", function (
     var m2 = req.body.m2;
     var m3 = req.body.m3;
     var m4 = req.body.m4;
-    var total=req.body.total;
+    var total = req.body.total;
     var avg = req.body.avg;
     var result = req.body.result;
     var grade = req.body.grade;
@@ -114,14 +114,8 @@ student.findByIdAndUpdate(req.params.id,req.body.students, function(err,updatedS
 });
 // DESTROY CAMPGROUND ROUTE
 router.delete("/:id", function(req, res){
-    student.findByIdAndRemove(req.params.id, function(err){
-       if(err){
-           res.redirect("/students");
-       } else {
-           res.redirect("/students");
-       }
+ res.send("you are trying to delete something");
     });
- });
 
 
 
