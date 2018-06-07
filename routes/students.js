@@ -2,7 +2,6 @@ var express = require("express");
 var router = express.Router();
 var student = require("../models/stud");
 
-
 // INDEX -show all student details
 router.get("/", function (req, res) {
 
@@ -12,9 +11,7 @@ router.get("/", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render("students", {
-                students: allStudents
-            });
+            res.render('students', {students: allStudents});
         }
 
     });
@@ -33,6 +30,11 @@ router.post("/", function (
     var m2 = req.body.m2;
     var m3 = req.body.m3;
     var m4 = req.body.m4;
+    var total=req.body.total;
+    var avg = req.body.avg;
+    var result = req.body.result;
+    var grade = req.body.grade;
+
     var newStudent = {
         name: name,
         batch: batch,
@@ -40,7 +42,11 @@ router.post("/", function (
         m1: m1,
         m2: m2,
         m3: m3,
-        m4: m4
+        m4: m4,
+        total:total,
+        avg:avg,
+        result:result,
+        grade:grade
     }
 
     // Create a new student detail and save to database
@@ -73,19 +79,51 @@ router.get("/:id",function (req, res) {
             console.log(err);
         } else {
             //render show template with that student
-            res.render("views/show", {
+            res.render("students/show", {
                 student: foundStudents });
         }
     });
 });
 // edit student route
 router.get("/:id/edit", function(req,res){
-    res.send("/edit");
+    student.findById(req.params.id, function(err,foundStudents){
+        if(err){
+            res.redirect("/students");
+        }else{
+            res.send("students/edit",{student:foundStudents});
+
+        }
+    });
 });
+
 // update student route
 
+router.put("/:id",function(req,res){
+// find and update the correct student details
+
+student.findByIdAndUpdate(req.params.id,req.body.students, function(err,updatedStudent){
+    if(err){
+            res.redirect("students");
+    }else{
+        // redirect somewhere show page
+
+            res.redirect("students/" + req.params.id)
+    }
+});
+
+});
+// DESTROY CAMPGROUND ROUTE
+router.delete("/:id", function(req, res){
+    student.findByIdAndRemove(req.params.id, function(err){
+       if(err){
+           res.redirect("/students");
+       } else {
+           res.redirect("/students");
+       }
+    });
+ });
 
 
 
-    module.exports = router;
+module.exports = router;
 

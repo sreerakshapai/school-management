@@ -8,17 +8,17 @@ var express = require("express"),
     methodOverride = require("method-override"),
     localStrategy = require("passport-local")
 
-
-
-//requring routes
-  var  studRoutes = require("./routes/students"),
-    indexRoutes      = require("./routes/index")
+// Mongoose Connections
 
 var mongoose = require("mongoose");
 var mongoDB = 'mongodb://rakshavibs:vibs2018@ds141870.mlab.com:41870/schoolapp';
 mongoose.connect(mongoDB);
 
-seedDB();
+// seedDB();
+
+
+var  studRoutes = require("./routes/students");
+var indexRoutes = require("./routes/index");
 
 app.use(bodyParser.urlencoded({
     extended: true
