@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var student = require("../models/stud");
+var middleware = require("../middleware");
 
 // INDEX -show all student details
 router.get("/", function (req, res) {
@@ -15,11 +16,9 @@ router.get("/", function (req, res) {
         }
 
     });
-
-
 });
 // CREATE -add new  student info to db
-router.post("/", function (
+router.post("/",middleware.isLoggedIn, function (
     req, res) {
 
     // get data from form and add to students array
@@ -56,6 +55,8 @@ router.post("/", function (
             console.log(err);
         } else {
             // redirect back to students
+            console.log(newlyCreated);
+
             res.redirect("/students");
         }
 
@@ -66,7 +67,7 @@ router.post("/", function (
 
 
 // new
-router.get("/new",function (req, res) {
+router.get("/new",middleware.isLoggedIn,function (req, res) {
     res.render("students/new");
 })
 
@@ -78,6 +79,8 @@ router.get("/:id",function (req, res) {
         if (err) {
             console.log(err);
         } else {
+            console.log(foundStudents);
+
             //render show template with that student
             res.render("students/show", {
                 student: foundStudents });
@@ -85,7 +88,7 @@ router.get("/:id",function (req, res) {
     });
 });
 // edit student route
-router.get("/:id/edit", function(req,res){
+router.get("/:id/edit", middleware.checkStudentOwnership, function(req,res){
     student.findById(req.params.id, function(err,foundStudents){
         if(err){
             res.redirect("/students");
@@ -98,7 +101,7 @@ router.get("/:id/edit", function(req,res){
 
 // update student route
 
-router.put("/:id",function(req,res){
+router.put("/:id", middleware.checkStudentOwnership,function(req,res){
 // find and update the correct student details
 
 student.findByIdAndUpdate(req.params.id,req.body.students, function(err,updatedStudent){
@@ -112,11 +115,17 @@ student.findByIdAndUpdate(req.params.id,req.body.students, function(err,updatedS
 });
 
 });
-// DESTROY CAMPGROUND ROUTE
-router.delete("/:id", function(req, res){
- res.send("you are trying to delete something");
-    });
 
+// DESTROY STUDENT ROUTE
+router.delete("/:id", middleware.checkStudentOwnership,function(req, res){
+    student.findByIdAndRemove(req.params.id, function(err){
+       if(err){
+           res.redirect("/students");
+       } else {
+           res.redirect("/students");
+       }
+    });
+ });
 
 
 module.exports = router;

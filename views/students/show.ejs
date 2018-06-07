@@ -15,6 +15,19 @@
                 <p><%= students.avg %></p>
                 <p><%= students.result %></p>
                 <p><%= students.grade %></p>
+
+
+
+                <p>
+                        <em>Submitted By <%= students.author.username %></em>
+                    </p>
+                    <% if(currentUser && students.author.id.equals(currentUser._id)){ %>
+                        <a class="btn btn-xs btn-warning" href="../students/edit students._id %>/edit">Edit</a>
+                        <form id="delete-form" action="../students/edit students._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">Delete</button>
+                        </form>
+                    <% }%>
+
         </div>
     </div>
   

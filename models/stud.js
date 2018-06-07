@@ -12,6 +12,13 @@ var studentSchema = new mongoose.Schema({
     total:Number,
     avg:Number,
     result:String,
-    grade:String
+    grade:String ,
+    author: {
+        id: {
+           type: mongoose.Schema.Types.ObjectId,
+           ref: "User"
+        },
+        username: String
+     },
 })
 module.exports = mongoose.model("student", studentSchema);
