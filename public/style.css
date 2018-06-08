@@ -1,16 +1,16 @@
-
 .student {
     border: 5px double black;
     margin: 2.5% auto;
     background-color: navajowhite;
     padding: 20px 20px;
-     text-align: center;  
-     width: 40%; 
+    text-align: center;
+    width: 40%;
 }
 
- #form1{
-    width:100%;
+#form1 {
+    width: 100%;
 }
+
 .form-group {
     flex: 1;
     display: flex;
@@ -18,10 +18,9 @@
     padding: 2%;
 }
 
-.form-group > * {
+.form-group>* {
     margin: 0;
 }
-
 
 input {
     flex: 5;

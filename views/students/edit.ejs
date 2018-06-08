@@ -1,110 +1,113 @@
-<h1>edit form</h1><% include partials/header %>
-<div class="container">
-    <h1 style="text-align: center;">Edit <%= students.name %></h1>
-    <div style="width: 30%; margin: 25px auto">
+<% include ../partials/header %>
+
+    <h1>edit form</h1>
+
+    <div class="container">
+        <h1 style="text-align: center;">Edit</h1>
+        <div style="width: 30%; margin: 25px auto">
 
 
-        <form id="form1" action="/students/<%= students._id %>/?_method =PUT" method="POST">
-            <div class="form-group">
-               Enter the Name :
-                <input class="form-control" type="text" size="20" name="students[name]" value="<%= students.name %>">
-            </div>
-            <div class="form-group">
-                Batch :
-             <input class="form-control" type="text" size="20" name="students[batch]" value="<%= students.batch %>">
-         </div>
-         <div class="form-group">
-           Group :
-             <input class="form-control" type="text" size="20" name="students[group] "value="<%= students.group %>">
-         </div>
-            <div class="form-group">
-             Marks in m1 :
-                <input class="form-control" type="text" size="20" name="students[m1]" value="<%= students.m1 %>">
+            <form id="form1" action="/students" method="POST">
+                <div class="form-group">
+                    Enter the Name :
+                    <input class="form-control" type="text" size="20" name="student[name]" value="<%= student.name %>">
+                </div>
+                <div class="form-group">
+                    Batch :
+                    <input class="form-control" type="text" size="20" name="student[batch]" value="<%= student.batch %>">
+                </div>
+                <div class="form-group">
+                    Group :
+                    <input class="form-control" type="text" size="20" name="student[group] " value="<%= student.group %>">
+                </div>
+                <div class="form-group">
+                    Marks in m1 :
+                    <input class="form-control" type="text" size="20" name="student[m1]" value="<%= student.m1 %>">
 
 
-            </div>
-            <div class="form-group">
-                 Marks in m2 :
-                <input class="form-control" type="text" size="20" name="students[m2]" value="<%= students.m2 %>">
-            </div>
+                </div>
+                <div class="form-group">
+                    Marks in m2 :
+                    <input class="form-control" type="text" size="20" name="student[m2]" value="<%= student.m2 %>">
+                </div>
 
-            <div class="form-group">
-             Marks in m3 :
-             
-                <input class="form-control" type="text" size="20" name="students[m3]" value="<%= students.m3 %>">
-            </div>
+                <div class="form-group">
+                    Marks in m3 :
 
-            <div class="form-group">
-             Marks in m4 :
-               
-                <input class="form-control" type="text" size="20" name="students[m4]" value="<%= students.m4 %>">
+                    <input class="form-control" type="text" size="20" name="student[m3]" value="<%= student.m3 %>">
+                </div>
 
-            </div>
+                <div class="form-group">
+                    Marks in m4 :
 
-            <div class="form-group">
-              
-                <input class=" btn btn-lg btn-primary btn-block" type="button"  name="students[btn]" value="Calculate" onclick="calc()" />
+                    <input class="form-control" type="text" size="20" name="student[m4]" value="<%= student.m4 %>">
 
-            </div>
-            <div class="form-group">
+                </div>
 
-                Total :
-                <input class="form-control" type="text" size="20" name="students[total]" value="<%= students.total %>" >
-            </div>
+                <div class="form-group">
 
-            <div class="form-group">
-                Average :
-                <input class="form-control" type="text" size="20" name="students[avg]" value="<%= students.avg %>" >
-            </div>
+                    <input class=" btn btn-lg btn-primary btn-block" type="button" name="student[btn]" value="Calculate" onclick="calc()" />
 
-            <div class="form-group">
-                Result :
-                <input class="form-control" type="text" size="20" name="students[result]"value="<%= students.result %>" >
-            </div>
-            <div class="form-group">
-                <br /> Grade :
-                <input class="form-control" type="text" size="20" name="students[grade]" value="<%= students.grade %>">
-            </div>
-            <div class="form-group">
-                <br />
-                <input class="btn btn-lg btn-primary btn-block" type="submit" name="students[Btn2]" value="Submit" >
-            </div>
-            <div class="form-group">
-                <br />
-                <input class="btn btn-lg btn-primary btn-block" type="reset" name="students[Btn2]" value="Reset" >
-            </div>
+                </div>
+                <div class="form-group">
 
-        </form>
-        <a href="/students">Go Back</a>
-        <script type="text/javascript">
-            function calc() {
-                form = document.getElementById("form1");
-                m1 = form.m1.value;
-                m2 = form.m2.value;
-                m3 = form.m3.value;
-                m4 = form.m4.value;
-                // Find the total -- TypeCast the values of the textboxes to integer.
-                total = parseInt(m1) + parseInt(m2) + parseInt(m3) + parseInt(m4);
-                form.total.value = total; // display the total into textbox.
-                form.avg.value = parseInt(total) / 4; // typecast.
-                // if any one sub is <35 then result is "Fail".
-                if (m1 < 35 || m2 < 35 || m3 < 35 || m4 < 35) {
-                    form.result.value = "Fail";
-                } else {
-                    form.result.value = "Pass";
+                    Total :
+                    <input class="form-control" type="text" size="20" name="student[total]" value="<%= student.total %>">
+                </div>
+
+                <div class="form-group">
+                    Average :
+                    <input class="form-control" type="text" size="20" name="student[avg]" value="<%= student.avg %>">
+                </div>
+
+                <div class="form-group">
+                    Result :
+                    <input class="form-control" type="text" size="20" name="student[result]" value="<%= student.result %>">
+                </div>
+                <div class="form-group">
+                    <br /> Grade :
+                    <input class="form-control" type="text" size="20" name="student[grade]" value="<%= student.grade %>">
+                </div>
+                <div class="form-group">
+                    <br />
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" name="student[Btn2]" value="Submit">
+                </div>
+                <div class="form-group">
+                    <br />
+                    <input class="btn btn-lg btn-primary btn-block" type="reset" name="student[Btn2]" value="Reset">
+                </div>
+
+            </form>
+            <a href="/students">Go Back</a>
+            <script type="text/javascript">
+                function calc() {
+                    form = document.getElementById("form1");
+                    m1 = form.m1.value;
+                    m2 = form.m2.value;
+                    m3 = form.m3.value;
+                    m4 = form.m4.value;
+                    // Find the total -- TypeCast the values of the textboxes to integer.
+                    total = parseInt(m1) + parseInt(m2) + parseInt(m3) + parseInt(m4);
+                    form.total.value = total; // display the total into textbox.
+                    form.avg.value = parseInt(total) / 4; // typecast.
+                    // if any one sub is <35 then result is "Fail".
+                    if (m1 < 35 || m2 < 35 || m3 < 35 || m4 < 35) {
+                        form.result.value = "Fail";
+                    } else {
+                        form.result.value = "Pass";
+                    }
+                    // Grading system.
+                    if (form.avg.value > 90) {
+                        form.grade.value = "A";
+                    } else if (form.avg.value > 80 && form.avg.value < 90) {
+                        form.grade.value = "B";
+                    } else if (form.avg.value > 70 && form.avg.value < 80) {
+                        form.grade.value = "C";
+                    } else if (form.avg.value > 60 && form.avg.value < 70) {
+                        form.grade.value = "D";
+                    } else if (form.avg.value >= 35 && form.avg.value < 60) {
+                        form.grade.value = "E";
+                    }
                 }
-                // Grading system.
-                if (form.avg.value > 90) {
-                    form.grade.value = "A";
-                } else if (form.avg.value > 80 && form.avg.value < 90) {
-                    form.grade.value = "B";
-                } else if (form.avg.value > 70 && form.avg.value < 80) {
-                    form.grade.value = "C";
-                } else if (form.avg.value > 60 && form.avg.value < 70) {
-                    form.grade.value = "D";
-                } else if (form.avg.value >= 35 && form.avg.value < 60) {
-                    form.grade.value = "E";
-                }
-            }
-        </script>
-    </div>
+            </script>
+        </div>

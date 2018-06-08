@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 var student = require("../models/stud");
-// var middleware = require("../middleware");
 
 // INDEX -show all student details
 router.get("/", function (req, res) {
@@ -12,7 +11,9 @@ router.get("/", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render('students', {students: allStudents});
+            res.render('students', {
+                students: allStudents
+            });
         }
 
     });
@@ -42,10 +43,10 @@ router.post("/", function (
         m2: m2,
         m3: m3,
         m4: m4,
-        total:total,
-        avg:avg,
-        result:result,
-        grade:grade
+        total: total,
+        avg: avg,
+        result: result,
+        grade: grade
     }
 
     // Create a new student detail and save to database
@@ -67,13 +68,13 @@ router.post("/", function (
 
 
 // new
-router.get("/new",function (req, res) {
+router.get("/new", function (req, res) {
     res.render("students/new");
 })
 
 
 // show
-router.get("/:id",function (req, res) {
+router.get("/:id", function (req, res) {
     //find the student with provided ID
     student.findById(req.params.id, function (err, foundStudents) {
         if (err) {
@@ -83,49 +84,57 @@ router.get("/:id",function (req, res) {
 
             //render show template with that student
             res.render("students/show", {
-                student: foundStudents });
+                student: foundStudents
+            });
         }
     });
 });
 // edit student route
-router.get("/:id/edit", function(req,res){
-    student.findById(req.params.id, function(err,foundStudents){
-       
-            res.render("students/edit",{student:foundStudents});
+router.get("/:id/edit", function (req, res) {
+    student.findById(req.params.id, function (err, foundStudents) {
 
-        
+
+        if (err) {
+            res.redirect("students");
+        } else {
+            res.render("students/edit", {
+                student: foundStudents
+            });
+
+        }
+
+
     });
 });
 
 // update student route
 
-router.put("/:id", function(req,res){
-// find and update the correct student details
+router.put("/:id", function (req, res) {
+    // find and update the correct student details
 
-student.findByIdAndUpdate(req.params.id,req.body.students, function(err,updatedStudent){
-    if(err){
-            res.redirect("students");
-    }else{
-        // redirect somewhere show page
+    student.findByIdAndUpdate(req.params.id, req.body.student, function (err, updatedStudent) {
+        if (err) {
+            res.redirect("/students");
+        } else {
+            // redirect somewhere show page
 
             res.redirect("/students/" + req.params.id)
-    }
-});
+        }
+    });
 
 });
 
 
 // DESTROY STUDENT ROUTE
-router.delete("/:id",function(req, res){
-    student.findByIdAndRemove(req.params.id, function(err){
-       if(err){
-           res.redirect("/students");
-       } else {
-           res.redirect("/students");
-       }
+router.delete("/:id", function (req, res) {
+    student.findByIdAndRemove(req.params.id, function (err) {
+        if (err) {
+            res.redirect("/students");
+        } else {
+            res.redirect("/students");
+        }
     });
- });
+});
 
 
 module.exports = router;
-

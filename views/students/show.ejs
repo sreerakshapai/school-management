@@ -1,44 +1,67 @@
-
 <% include ../partials/header %>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
                 <% var id = student.id 
                 var updateLink = "students/" + id + "/edit"; 
                 var deleteLink = "students/" + id + "/delete";
                 %>
-                 <h1><%= student.name %></h1>
-                <p><%= student.batch %></p>
-                <p><%= student.group %></p>
-                <p><%= student.m1 %></p>
-                <p><%= student.m2 %></p>
-                <p><%= student.m3 %></p>
-                <p><%= student.m4 %></p>
-                <p><%= student.total %></p>
-                <p><%= student.avg %></p>
-                <p><%= student.result %></p>
-                <p><%= student.grade %></p>
+                    <h1>
+                        <%= student.name %>
+                    </h1>
+                    <p>
+                        <%= student.batch %>
+                    </p>
+                    <p>
+                        <%= student.group %>
+                    </p>
+                    <p>
+                        <%= student.m1 %>
+                    </p>
+                    <p>
+                        <%= student.m2 %>
+                    </p>
+                    <p>
+                        <%= student.m3 %>
+                    </p>
+                    <p>
+                        <%= student.m4 %>
+                    </p>
+                    <p>
+                        <%= student.total %>
+                    </p>
+                    <p>
+                        <%= student.avg %>
+                    </p>
+                    <p>
+                        <%= student.result %>
+                    </p>
+                    <p>
+                        <%= student.grade %>
+                    </p>
 
 
 
-               <div class="col-md-9">
-                <div class="student-data">
-                 
-                            <em>Submitted By <%= student.author.username %></em>
-                        </p>
-                        <% if(currentUser && student.author.id.equals(currentUser._id)){ %>
-                            <a class="btn btn-xs btn-warning" href="/students/<%= student._id %>/edit">Update</a>
-                            <form id="delete-form" action="/students/<%= student._id %>?_method=DELETE" method="POST">
-                                <button class="btn btn-xs btn-danger">Delete</button>
-                            </form>
-                        <% }%>
-                    
-                </div>
+                    <div class="col-md-9">
+                        <div class="student-data">
 
-        </div>  
-    </div>
-  
-</div>
+                            <em>Submitted By
+                                <%= student.author.username %>
+                            </em>
+                            </p>
+                            <% if(currentUser && student.author.id.equals(currentUser._id)){ %>
+                                <a class="btn btn-xs btn-warning" href="/students/<%= student._id %>/edit">Update</a>
+                                <form id="delete-form" action="/students/<%= student._id %>?_method=DELETE" method="POST">
+                                    <button class="btn btn-xs btn-danger">Delete</button>
+                                </form>
+                                <% }%>
 
-<% include ../partials/footer %>
+                        </div>
+
+                    </div>
+            </div>
+
+        </div>
+
+        <% include ../partials/footer %>
