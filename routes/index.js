@@ -24,7 +24,7 @@ User.register(newUser, req.body.password, function(err, user){
         return res.render("register");
     }
     passport.authenticate("local")(req, res, function(){
-       res.redirect("/students"); 
+       res.redirect("./candidate/students"); 
     });
 });
 });
@@ -36,7 +36,7 @@ res.render("login");
 // handling login logic
 router.post("/login", passport.authenticate("local", 
  {
-     successRedirect: "/students",
+     successRedirect: "./candidate/students",
      failureRedirect: "/login"
  }), function(req, res){
 });
@@ -44,7 +44,7 @@ router.post("/login", passport.authenticate("local",
 // logout route
 router.get("/logout", function(req, res){
 req.logout();
-res.redirect("/students");
+res.redirect("./candidate/students");
 });
 
 

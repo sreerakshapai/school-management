@@ -21,4 +21,4 @@ var studentSchema = new mongoose.Schema({
         username: String
      },
 })
-module.exports = mongoose.model("student", studentSchema);
+module.exports = mongoose.model("stud", studentSchema);

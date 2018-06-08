@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-                <% var id = students.id 
+                <% var id = student.id 
                 var updateLink = "students/" + id + "/edit"; 
                 var deleteLink = "students/" + id + "/delete";
                 %>
@@ -22,17 +22,21 @@
 
 
 
-                <p>
-                        <em>Submitted By <%= student.author.username %></em>
-                    </p>
-                    <% if(currentUser && student.author.id.equals(currentUser._id)){ %>
-                        <a class="btn btn-xs btn-warning" href="../students/edit students._id %>/edit">Edit</a>
-                        <form id="delete-form" action="../students/edit students._id %>?_method=DELETE" method="POST">
-                            <button class="btn btn-xs btn-danger">Delete</button>
-                        </form>
-                    <% }%>
+               <div class="col-md-9">
+                <div class="student-data">
+                 
+                            <em>Submitted By <%= student.author.username %></em>
+                        </p>
+                        <% if(currentUser && student.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning" href="/students/<%= student._id %>/edit">Update</a>
+                            <form id="delete-form" action="/students/<%= student._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-xs btn-danger">Delete</button>
+                            </form>
+                        <% }%>
+                    
+                </div>
 
-        </div>
+        </div>  
     </div>
   
 </div>

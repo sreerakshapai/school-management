@@ -114,6 +114,7 @@ student.findByIdAndUpdate(req.params.id,req.body.students, function(err,updatedS
 
 });
 
+
 // DESTROY STUDENT ROUTE
 router.delete("/:id",function(req, res){
     student.findByIdAndRemove(req.params.id, function(err){
