@@ -3,6 +3,7 @@ var express = require("express"),
     bodyParser = require("body-parser"),
     student = require("./models/stud"),
     User = require("./models/user"),
+    flash = require("connect-flash"),
     seedDB = require("./seeds"),
     passport = require("passport"),
     methodOverride = require("method-override"),
@@ -17,17 +18,16 @@ mongoose.connect(mongoDB);
 // seedDB();
 
 
-var  studRoutes = require("./routes/students");
+var studRoutes = require("./routes/students");
 var indexRoutes = require("./routes/index");
 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.set("view engine", "ejs");
-
 app.use(express.static('public'));
-
 app.use(methodOverride("_method"));
+app.use(flash());
 
 
 

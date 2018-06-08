@@ -1,27 +1,31 @@
 
-<% include partials/header %>
+<% include ../partials/header %>
 
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-                 <h1><%= students.name %></h1>
-                <p><%= students.batch %></p>
-                <p><%= students.group %></p>
-                <p><%= students.m1 %></p>
-                <p><%= students.m2 %></p>
-                <p><%= students.m3 %></p>
-                <p><%= students.m4 %></p>
-                <p><%= students.total %></p>
-                <p><%= students.avg %></p>
-                <p><%= students.result %></p>
-                <p><%= students.grade %></p>
+                <% var id = students.id 
+                var updateLink = "students/" + id + "/edit"; 
+                var deleteLink = "students/" + id + "/delete";
+                %>
+                 <h1><%= student.name %></h1>
+                <p><%= student.batch %></p>
+                <p><%= student.group %></p>
+                <p><%= student.m1 %></p>
+                <p><%= student.m2 %></p>
+                <p><%= student.m3 %></p>
+                <p><%= student.m4 %></p>
+                <p><%= student.total %></p>
+                <p><%= student.avg %></p>
+                <p><%= student.result %></p>
+                <p><%= student.grade %></p>
 
 
 
                 <p>
-                        <em>Submitted By <%= students.author.username %></em>
+                        <em>Submitted By <%= student.author.username %></em>
                     </p>
-                    <% if(currentUser && students.author.id.equals(currentUser._id)){ %>
+                    <% if(currentUser && student.author.id.equals(currentUser._id)){ %>
                         <a class="btn btn-xs btn-warning" href="../students/edit students._id %>/edit">Edit</a>
                         <form id="delete-form" action="../students/edit students._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger">Delete</button>
@@ -33,4 +37,4 @@
   
 </div>
 
-<% include partials/footer %>
+<% include ../partials/footer %>
