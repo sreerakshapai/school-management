@@ -28,7 +28,10 @@
                         <p>Average: <%= students.avg %></p>
                         <p>Grade: <%= students.grade %></p>
                        <a class="btn btn-primary" href=<%= updateLink %>>Update</a>
-                       <a class="btn btn-primary" href=<%= deleteLink %>>Delete</a>
+                       <form id="delete-form" action="/students/<%= students.id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-primary">Delete</button>
+                        </form>
+                       
                     
                     </div>
                 <% });  %>

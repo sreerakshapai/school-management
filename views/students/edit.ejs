@@ -6,7 +6,7 @@
         <div style="width: 30%; margin: 25px auto">
 
 
-            <form id="form1" action="/students" method="POST">
+            <form id="form1" action="/students/<%= student.id %>?_method=PUT" method="POST">
                 <div class="form-group">
                     Enter the Name :
                     <input class="form-control" type="text" size="20" name="student[name]" value="<%= student.name %>">
@@ -22,8 +22,6 @@
                 <div class="form-group">
                     Marks in m1 :
                     <input class="form-control" type="text" size="20" name="student[m1]" value="<%= student.m1 %>">
-
-
                 </div>
                 <div class="form-group">
                     Marks in m2 :
@@ -32,7 +30,6 @@
 
                 <div class="form-group">
                     Marks in m3 :
-
                     <input class="form-control" type="text" size="20" name="student[m3]" value="<%= student.m3 %>">
                 </div>
 
@@ -69,11 +66,11 @@
                 </div>
                 <div class="form-group">
                     <br />
-                    <input class="btn btn-lg btn-primary btn-block" type="submit" name="student[Btn2]" value="Submit">
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">
                 </div>
                 <div class="form-group">
                     <br />
-                    <input class="btn btn-lg btn-primary btn-block" type="reset" name="student[Btn2]" value="Reset">
+                    <input class="btn btn-lg btn-primary btn-block" type="reset" value="Reset">
                 </div>
 
             </form>

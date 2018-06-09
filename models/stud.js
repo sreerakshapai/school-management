@@ -20,4 +20,4 @@ var studentSchema = new mongoose.Schema({
         username: String
     },
 })
-module.exports = mongoose.model("stud", studentSchema);
+module.exports = mongoose.model("students", studentSchema);

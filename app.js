@@ -4,6 +4,8 @@ var express = require("express"),
     student = require("./models/stud"),
     User = require("./models/user"),
     seedDB = require("./seeds"),
+    flash       = require("connect-flash"),
+
     passport = require("passport"),
     methodOverride = require("method-override"),
     localStrategy = require("passport-local")
@@ -25,6 +27,7 @@ app.use(bodyParser.urlencoded({
 app.set("view engine", "ejs");
 app.use(express.static('public'));
 app.use(methodOverride("_method"));
+app.use(flash());
 
 
 
