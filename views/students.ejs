@@ -1,63 +1,37 @@
 <% include partials/header %>
 
-
     <div class="container">
-        <header class="jumbotron">
+            <header class="jumbotron">
             <div class="container">
                 <h1>Welcome to ABC Schools</h1>
                 <p> View Student Information</p>
                 <p>
                     <a class="btn btn-primary btn-large" href="students/new">Add a new Student details</a>
-
                 </p>
-
 
         </header>
         <div class="details">
             <% students.forEach(function(students){ %>
-                <% var id = students.id 
-                    var updateLink = id + "/edit"; 
-                    var deleteLink = id + "/delete";
+                    <% var id = students.id 
+                    var updateLink = "/students/" + id + "/edit"; 
+                    var deleteLink = "/students/" + id + "/delete";
                     %>
                     <div class="student">
-                        <h3>Name:
-                            <%= students.name %>
-                        </h3>
-                        <p>Batch:
-                            <%= students.batch %>
-                        </p>
-                        <p>Group:
-                            <%= students.group %>
-                        </p>
-                        <p>Physics:
-                            <%= students.m1 %>
-                        </p>
-                        <p>Chemistry:
-                            <%= students.m2 %>
-                        </p>
-                        <p>Biology:
-                            <%= students.m3 %>
-                        </p>
-                        <p>Maths:
-                            <%= students.m4 %>
-                        </p>
-                        <p>Total:
-                            <%= students.total %>
-                        </p>
-                        <p>Average:
-                            <%= students.avg %>
-                        </p>
-                        <p>Grade:
-                            <%= students.grade %>
-                        </p>
-                        <a class="btn btn-primary" href=<%=u pdateLink %>>Update</a>
-
-
-
-                        <a class="btn btn-primary" href=<%=d eleteLink %>>Delete</a>
-
+                        <h3>Name: <%= students.name %></h3>
+                        <p>Batch: <%= students.batch %></p>
+                        <p>Group: <%= students.group %></p>
+                        <p>Physics: <%= students.m1 %></p>
+                        <p>Chemistry: <%= students.m2 %></p>
+                        <p>Biology: <%= students.m3 %></p>
+                        <p>Maths: <%= students.m4 %></p>
+                        <p>Total: <%= students.total %></p>
+                        <p>Average: <%= students.avg %></p>
+                        <p>Grade: <%= students.grade %></p>
+                       <a class="btn btn-primary" href=<%= updateLink %>>Update</a>
+                       <a class="btn btn-primary" href=<%= deleteLink %>>Delete</a>
+                    
                     </div>
-                    <% });  %>
+                <% });  %>
         </div>
 
         </div>

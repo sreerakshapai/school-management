@@ -65,13 +65,10 @@ router.post("/", function (
 
 });
 
-
-
 // new
 router.get("/new", function (req, res) {
     res.render("students/new");
 })
-
 
 // show
 router.get("/:id", function (req, res) {
@@ -102,8 +99,6 @@ router.get("/:id/edit", function (req, res) {
             });
 
         }
-
-
     });
 });
 
@@ -124,7 +119,6 @@ router.put("/:id", function (req, res) {
 
 });
 
-
 // DESTROY STUDENT ROUTE
 router.delete("/:id", function (req, res) {
     student.findByIdAndRemove(req.params.id, function (err) {
@@ -135,6 +129,5 @@ router.delete("/:id", function (req, res) {
         }
     });
 });
-
 
 module.exports = router;
