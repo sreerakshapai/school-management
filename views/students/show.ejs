@@ -51,9 +51,9 @@
                             </em>
                             </p>
                             <% if(currentUser && student.author.id.equals(currentUser._id)){ %>
-                                <a class="btn btn-xs btn-warning" href="/students/<%= student._id %>/edit">Update</a>
+                                <a class="btn  btn-large btn-warning" href="/students/<%= student._id %>/edit">Update</a>
                                 <form id="delete-form" action="/students/<%= student._id %>?_method=DELETE" method="GET">
-                                    <button class="btn btn-xs btn-danger">Delete</button>
+                                    <button class="btn  btn-large btn-danger">Delete</button>
                                 </form>
                                 <% }%>
 
